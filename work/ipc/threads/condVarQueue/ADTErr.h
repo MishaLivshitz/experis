@@ -1,0 +1,31 @@
+#ifndef _ADDTErr__H_
+#define _ADDTErr__H_
+
+#ifndef FALSE
+#define FALSE 0
+#endif
+
+#ifndef TRUE
+#define TRUE !FALSE
+#endif
+
+typedef enum
+{
+	ERR_NOT_INITIALIZED=-2,
+	ERR_OPEN_FILE_FAILED=-1,
+	ERR_OK=0,
+	ERR_GENERAL,
+	ERR_ALLOCATION_FAILED,
+	ERR_REALLOCATION_FAILED,
+	ERR_UNDERFLOW,
+	ERR_OVERFLOW,
+	ERR_WRONG_INDEX,
+	ERR_NOT_FOUND,
+	ERR_STACK_BBBB = 30,
+	ERR_NULL_POINTER,
+	ERR_EMPTY,
+	ERR_EXIST
+
+}ADTErr;
+
+#endif

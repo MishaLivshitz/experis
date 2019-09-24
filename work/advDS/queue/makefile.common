@@ -1,0 +1,44 @@
+# This makefile will build all sources into 
+#	TARGET defined in caller
+#   INC_DIR may contain list of all include directories
+INC_DIR ?= ../include
+
+# Sources are all .c files in directory, if $(SOURCES) not defined already
+SOURCES += $(wildcard *.c)
+
+# Objects are all sources with substitution of filename extension .c to .o
+OBJECTS ?= $(SOURCES:.c=.o)
+# default compiler is CC, but we use $(CC)
+CC = gcc
+# Compiler and linker flags
+# C pre-processor flags
+#	Add -I to the list of include directories and add this to CPPFLAGS
+CPPFLAGS += $(addprefix -I,$(INC_DIR))
+#   Compilation flags
+CFLAGS	 ?= -g3 -ansi -pedantic -Wall -DDEBUG -fPIC
+#   Linker flags
+LDFLAGS	 ?= -g3
+#
+.PHONY:	all clean run
+
+all: $(TARGET) run
+
+# Link the target
+#%: %.o
+#	$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS)
+$(TARGET): $(OBJECTS)
+
+# Compile the object
+#%.o: %.c
+#	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
+
+# Ask C pre-processor to help us with include files
+include depends
+# You may decide to add/remove $(SOURCES) from dependents
+depends:
+	$(CC) -MM $(CPPFLAGS) $(SOURCES) > $(@)
+
+clean:
+	rm -f $(TARGET) *.o depends
+
+run: $(TARGET)

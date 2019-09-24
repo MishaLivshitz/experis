@@ -1,0 +1,10 @@
+[light-1-a-1]
+type = ACController
+room = room_1_a
+floor = 1
+config = iot:1003,sat:242, brigh:154, hue:8200
+
+[room-1-a-sprinkler]
+type = TempSensor
+room = room_1_a
+floor = 1
